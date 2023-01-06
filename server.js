@@ -54,16 +54,3 @@ mongoose
   .catch((err) => {
     console.error(err);
   });
-
-// app.get("/rest", function (req, res) {
-//   res.json({
-//     data: "yout hit rest endpoint",
-//   });
-// });
-
-// app.listen(process.env.PORT, function () {
-//   console.log(`server is ready at http://localhost:${process.env.PORT}`);
-//   console.log(
-//     `graphql server is ready at http://localhost:${process.env.PORT}/graphql`
-//   );
-// });

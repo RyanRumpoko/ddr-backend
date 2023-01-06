@@ -18,7 +18,6 @@ module.exports = (req) => {
     }
     throw new Error("Authorization header must be provided");
   } catch (error) {
-    console.log(error);
     throw error;
   }
 };
