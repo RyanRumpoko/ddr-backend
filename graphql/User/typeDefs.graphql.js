@@ -16,6 +16,9 @@ module.exports = gql`
     username: String!
     password: String!
   }
+  input LogoutInput {
+    _id: ID!
+  }
   input UserInput {
     username: String!
     password: String!
@@ -26,6 +29,7 @@ module.exports = gql`
   }
   type Mutation {
     login(input: LoginInput): User!
+    logout(input: LogoutInput): Boolean
     addUser(input: UserInput): User!
   }
 `;

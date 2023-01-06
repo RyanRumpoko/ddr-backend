@@ -12,7 +12,6 @@ const generateToken = (user) => {
       { expiresIn: "2h" }
     );
   } catch (error) {
-    console.log(error);
     throw error;
   }
 };

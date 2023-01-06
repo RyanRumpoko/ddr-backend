@@ -85,12 +85,26 @@ const login = async (_, { input: { username, password } }) => {
   }
 };
 
+const logout = async (_, { input: { _id } }) => {
+  try {
+    await User.findByIdAndUpdate(_id, {
+      token: null,
+    });
+    // await deleteRefreshToken(_id);
+    return true;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
 module.exports = {
   Query: {
     getAllUsers,
   },
   Mutation: {
     login,
+    logout,
     addUser,
   },
 };
