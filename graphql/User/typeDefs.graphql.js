@@ -7,6 +7,7 @@ module.exports = gql`
   type User {
     _id: ID
     username: String
+    role: String
     token: String
     createdAt: DateTime
     updatedAt: DateTime
@@ -22,6 +23,7 @@ module.exports = gql`
   input UserInput {
     username: String!
     password: String!
+    role: String
   }
 
   type Query {

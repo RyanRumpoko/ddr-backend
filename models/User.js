@@ -15,6 +15,9 @@ const userSchema = new Schema(
     token: {
       type: String,
     },
+    role: {
+      type: String,
+    },
   },
   { timestamps: true }
 );
