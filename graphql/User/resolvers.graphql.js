@@ -15,11 +15,14 @@ const getAllUsers = async (_, __, { req }) => {
   }
 };
 
-const addUser = async (_, { input: { username, password } }, { req }) => {
+const addUser = async (_, { input: { username, password, role } }, { req }) => {
   try {
     checkAuth(req);
     if (password === "") {
       throw new Error("Password cannot be empty.");
+    }
+    if (role === "") {
+      throw new Error("Role cannot be empty.");
     }
 
     const user = await User.findOne({ username });
