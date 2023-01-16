@@ -3,8 +3,27 @@ const { Schema } = mongoose;
 
 const serviceSchema = new Schema(
   {
-    rack_steer: {
+    service_name: {
       type: String,
+      required: true,
+    },
+    quantity: {
+      type: Number,
+      required: true,
+    },
+    price: {
+      type: Number,
+      required: true,
+    },
+    status: {
+      type: String,
+      enum: ["estimated", "ongoing", "done", "canceled"],
+      default: "estimated",
+      required: true,
+    },
+    invoice_id: {
+      type: Schema.Types.ObjectId,
+      ref: "Invoice",
     },
   },
   { timestamps: true }

@@ -14,7 +14,16 @@ const getAllCustomers = async (_, __, { req }) => {
 const addCustomer = async (_, { input }, { req }) => {
   try {
     checkAuth(req);
-    const { name, phone_number, brand, type, year, transmission } = input;
+    const {
+      name,
+      phone_number,
+      brand,
+      type,
+      year,
+      transmission,
+      color,
+      plate_number,
+    } = input;
 
     const customer = await Customer.findOne({ phone_number });
     if (customer) {
@@ -37,6 +46,8 @@ const addCustomer = async (_, { input }, { req }) => {
       type: type.toLowerCase(),
       year: year.toLowerCase(),
       transmission: transmission.toLowerCase(),
+      color: color.toLowerCase(),
+      plate_number: plate_number.toLowerCase(),
     });
     const res = await newCustomer.save();
 

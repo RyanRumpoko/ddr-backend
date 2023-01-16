@@ -5,6 +5,7 @@ const customerSchema = new Schema(
   {
     phone_number: {
       type: String,
+      match: [/^[0-9]*$/],
       required: true,
       unique: true,
     },
@@ -22,6 +23,12 @@ const customerSchema = new Schema(
       type: String,
     },
     transmission: {
+      type: String,
+    },
+    color: {
+      type: String,
+    },
+    plate_number: {
       type: String,
     },
   },
