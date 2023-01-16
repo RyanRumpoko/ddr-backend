@@ -12,6 +12,8 @@ module.exports = gql`
     type: String
     year: String
     transmission: String
+    color: String
+    plate_number: String
     createdAt: DateTime
     updatedAt: DateTime
   }
@@ -23,6 +25,8 @@ module.exports = gql`
     type: String
     year: String
     transmission: String
+    color: String
+    plate_number: String
   }
 
   type Query {
