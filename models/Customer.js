@@ -7,7 +7,6 @@ const customerSchema = new Schema(
       type: String,
       match: [/^[0-9]*$/],
       required: true,
-      unique: true,
     },
     name: {
       type: String,
@@ -30,6 +29,7 @@ const customerSchema = new Schema(
     },
     plate_number: {
       type: String,
+      unique: true,
     },
   },
   { timestamps: true }

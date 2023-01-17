@@ -22,7 +22,7 @@ const addService = async (_, { input }, { req }) => {
       quantity: quantity,
       price: price.toLowerCase(),
       status: status.toLowerCase(),
-      customer_id: customer_id,
+      invoice_id: invoice_id,
     });
 
     const res = await newService.save();
