@@ -25,9 +25,9 @@ const addCustomer = async (_, { input }, { req }) => {
       plate_number,
     } = input;
 
-    const customer = await Customer.findOne({ phone_number });
+    const customer = await Customer.findOne({ plate_number });
     if (customer) {
-      throw new Error("Phone number is already registered");
+      throw new Error("Plate number is already registered");
     }
 
     let changeNumber;
