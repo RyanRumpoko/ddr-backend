@@ -15,13 +15,12 @@ const getAllServices = async (_, __, { req }) => {
 const addService = async (_, { input }, { req }) => {
   try {
     checkAuth(req);
-    const { service_name, quantity, price, status, invoice_id } = input;
+    const { service_name, quantity, price, invoice_id } = input;
 
     const newService = new Service({
       service_name: service_name.toLowerCase(),
       quantity: quantity,
       price: price.toLowerCase(),
-      status: status.toLowerCase(),
       invoice_id: invoice_id,
     });
 
@@ -39,8 +38,25 @@ const addService = async (_, { input }, { req }) => {
 const getAllInvoices = async (_, __, { req }) => {
   try {
     checkAuth(req);
-
     return await Invoice.find().sort({ createdAt: 1 }).populate("customer_id");
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
+const getAllInvoicesByMonth = async (_, { input }, { req }) => {
+  try {
+    checkAuth(req);
+    const { this_month } = input;
+    const changeInputStart = this_month + "-01T00:00:01";
+    const changeInputEnd = this_month + "-31T23:59:59";
+    return await Invoice.countDocuments({
+      createdAt: {
+        $gte: new Date(changeInputStart),
+        $lte: new Date(changeInputEnd),
+      },
+    });
   } catch (error) {
     console.log(error);
     throw error;
@@ -50,7 +66,6 @@ const getAllInvoices = async (_, __, { req }) => {
 const getInvoiceByCustomerId = async (_, { id }, { req }) => {
   try {
     checkAuth(req);
-
     return await Invoice.find({ customer_id: id }).sort({ createdAt: 1 });
   } catch (error) {
     console.log(error);
@@ -66,6 +81,7 @@ const addInvoice = async (_, { input }, { req }) => {
     const newInvoice = new Invoice({
       invoice_number,
       customer_id,
+      status: "estimated",
     });
     const res = newInvoice.save();
     res.then((doc) => {
@@ -87,6 +103,7 @@ module.exports = {
     getAllServices,
     getAllInvoices,
     getInvoiceByCustomerId,
+    getAllInvoicesByMonth,
   },
   Mutation: {
     addService,

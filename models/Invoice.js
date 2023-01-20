@@ -12,6 +12,12 @@ const invoiceSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "Customer",
     },
+    status: {
+      type: String,
+      enum: ["estimated", "ongoing", "done", "canceled"],
+      default: "estimated",
+      required: true,
+    },
   },
   { timestamps: true }
 );

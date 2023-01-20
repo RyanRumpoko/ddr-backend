@@ -15,15 +15,13 @@ const serviceSchema = new Schema(
       type: Number,
       required: true,
     },
-    status: {
-      type: String,
-      enum: ["estimated", "ongoing", "done", "canceled"],
-      default: "estimated",
-      required: true,
-    },
     invoice_id: {
       type: Schema.Types.ObjectId,
       ref: "Invoice",
+    },
+    total: {
+      type: Number,
+      required: true,
     },
   },
   { timestamps: true }
