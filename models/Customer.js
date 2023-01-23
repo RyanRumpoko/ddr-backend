@@ -6,11 +6,9 @@ const customerSchema = new Schema(
     phone_number: {
       type: String,
       match: [/^[0-9]*$/],
-      required: true,
     },
     name: {
       type: String,
-      required: true,
     },
     brand: {
       type: String,

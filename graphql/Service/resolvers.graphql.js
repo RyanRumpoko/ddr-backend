@@ -12,6 +12,16 @@ const getAllServices = async (_, __, { req }) => {
   }
 };
 
+const getServicesByInvoiceId = async (_, { id }, { req }) => {
+  try {
+    checkAuth(req);
+    return await Service.find({ invoice_id: id }).sort({ createdAt: 1 });
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
 const addService = async (_, { input }, { req }) => {
   try {
     checkAuth(req);
@@ -104,6 +114,7 @@ module.exports = {
     getAllInvoices,
     getInvoiceByCustomerId,
     getAllInvoicesByMonth,
+    getServicesByInvoiceId,
   },
   Mutation: {
     addService,

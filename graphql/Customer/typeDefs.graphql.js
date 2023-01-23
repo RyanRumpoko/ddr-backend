@@ -28,9 +28,20 @@ module.exports = gql`
     color: String
     plate_number: String
   }
+  input SearchCustomerInput {
+    name: String
+    phone_number: String
+    brand: String
+    type: String
+    year: String
+    transmission: String
+    color: String
+    plate_number: String
+  }
 
   type Query {
     getAllCustomers: [Customer]
+    searchCustomer(input: SearchCustomerInput): [Customer]
   }
   type Mutation {
     addCustomer(input: CustomerInput): Customer!
