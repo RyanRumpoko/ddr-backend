@@ -27,7 +27,7 @@ const addCustomer = async (_, { input }, { req }) => {
 
     const customer = await Customer.findOne({ plate_number });
     if (customer) {
-      throw new Error("Plate number is already registered");
+      throw new Error("Plate nomor sudah di registrasi");
     }
 
     let changeNumber;
@@ -39,15 +39,28 @@ const addCustomer = async (_, { input }, { req }) => {
       changeNumber = phone_number;
     }
 
+    if (phone_number.trim().indexOf(" ") >= 0) {
+      throw new Error("Nomor telepon tidak boleh ada spasi");
+    }
+    if (year.trim().indexOf(" ") >= 0) {
+      throw new Error("Tahun tidak boleh ada spasi");
+    }
+    if (color.trim().indexOf(" ") >= 0) {
+      throw new Error("Warna tidak boleh ada spasi");
+    }
+    if (plate_number.trim().indexOf(" ") >= 0) {
+      throw new Error("Nomor polisi tidak boleh ada spasi");
+    }
+
     const newCustomer = new Customer({
-      name: name.toLowerCase(),
+      name: name.toLowerCase().trim().replace(/ /g, "_"),
       phone_number: changeNumber,
-      brand: brand.toLowerCase(),
-      type: type.toLowerCase(),
-      year: year.toLowerCase(),
-      transmission: transmission.toLowerCase(),
-      color: color.toLowerCase(),
-      plate_number: plate_number.toLowerCase(),
+      brand: brand.toLowerCase().trim().replace(/ /g, "_"),
+      type: type.toLowerCase().trim().replace(/ /g, "_"),
+      year: year.toLowerCase().trim(),
+      transmission: transmission.trim().toLowerCase(),
+      color: color.toLowerCase().trim(),
+      plate_number: plate_number.trim().toLowerCase(),
     });
     const res = await newCustomer.save();
 
@@ -60,9 +73,106 @@ const addCustomer = async (_, { input }, { req }) => {
   }
 };
 
+const searchCustomer = async (_, { input }, { req }) => {
+  try {
+    checkAuth(req);
+    let filterObject = [];
+
+    if (input.name !== "") {
+      filterObject.push({
+        name: {
+          $regex: `${input.name}`,
+          $options: "i",
+        },
+      });
+    }
+    if (input.phone_number !== "" && input.phone_number[0] !== "0") {
+      filterObject.push({
+        $or: [
+          {
+            phone_number: input.phone_number,
+          },
+          {
+            phone_number: "0" + input.phone_number,
+          },
+        ],
+      });
+    } else if (input.phone_number !== "" && input.phone_number[0] === "0") {
+      filterObject.push({
+        $or: [
+          {
+            phone_number: input.phone_number,
+          },
+          {
+            phone_number: input.phone_number.slice(1),
+          },
+        ],
+      });
+    }
+    if (input.brand !== "") {
+      filterObject.push({
+        brand: {
+          $regex: input.brand,
+          $options: "i",
+        },
+      });
+    }
+    if (input.type !== "") {
+      filterObject.push({
+        type: {
+          $regex: input.type,
+          $options: "i",
+        },
+      });
+    }
+    if (input.year !== "") {
+      filterObject.push({
+        year: {
+          $regex: input.year,
+          $options: "i",
+        },
+      });
+    }
+    if (input.transmission !== "") {
+      filterObject.push({
+        transmission: {
+          $regex: input.transmission,
+          $options: "i",
+        },
+      });
+    }
+    if (input.color !== "") {
+      filterObject.push({
+        color: {
+          $regex: input.color,
+          $options: "i",
+        },
+      });
+    }
+    if (input.plate_number !== "") {
+      filterObject.push({
+        plate_number: {
+          $regex: input.plate_number,
+          $options: "i",
+        },
+      });
+    }
+
+    const searchResult = await Customer.find({
+      $and: filterObject,
+    });
+
+    return searchResult;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
 module.exports = {
   Query: {
     getAllCustomers,
+    searchCustomer,
   },
   Mutation: {
     addCustomer,

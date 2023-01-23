@@ -17,9 +17,17 @@ module.exports = gql`
     service_name: String
     base_price: Int
   }
+  input GetSettingServicePagination {
+    page: Int!
+    perPage: Int!
+  }
 
   type Query {
     getAllSettingService: [SettingService]
+    getAllSettingServicePagination(
+      input: GetSettingServicePagination
+    ): [SettingService]
+    getTotalAllSettingService: Int!
   }
   type Mutation {
     addSettingService(input: SettingServiceInput): Service!
