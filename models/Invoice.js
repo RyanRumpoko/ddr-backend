@@ -18,6 +18,12 @@ const invoiceSchema = new Schema(
       default: "estimated",
       required: true,
     },
+    estimated_date: {
+      type: Date,
+    },
+    ongoing_date: {
+      type: Date,
+    },
   },
   { timestamps: true }
 );

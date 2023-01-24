@@ -92,6 +92,7 @@ const addInvoice = async (_, { input }, { req }) => {
       invoice_number,
       customer_id,
       status: "estimated",
+      estimated_date: new Date(),
     });
     const res = newInvoice.save();
     res.then((doc) => {
@@ -108,6 +109,26 @@ const addInvoice = async (_, { input }, { req }) => {
   }
 };
 
+const getTotalInvoicesToday = async (_, __, { req }) => {
+  try {
+    checkAuth(req);
+    const date = new Date();
+    const currentDate = date.toISOString().slice(0, 10);
+    const changeInputStart = currentDate + "T00:00:01";
+    const changeInputEnd = currentDate + "T23:59:59";
+
+    return await Invoice.countDocuments({
+      createdAt: {
+        $gte: new Date(changeInputStart),
+        $lte: new Date(changeInputEnd),
+      },
+    });
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
 module.exports = {
   Query: {
     getAllServices,
@@ -115,6 +136,7 @@ module.exports = {
     getInvoiceByCustomerId,
     getAllInvoicesByMonth,
     getServicesByInvoiceId,
+    getTotalInvoicesToday,
   },
   Mutation: {
     addService,

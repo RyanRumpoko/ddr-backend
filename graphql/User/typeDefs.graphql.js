@@ -25,13 +25,19 @@ module.exports = gql`
     password: String!
     role: String
   }
+  input ChangePasswordInput {
+    _id: ID!
+    password: String!
+  }
 
   type Query {
     getAllUsers: [User]
+    getUserById(_id: ID): User
   }
   type Mutation {
     login(input: LoginInput): User!
     logout(input: LogoutInput): Boolean
     addUser(input: UserInput): User!
+    changePassword(input: ChangePasswordInput): Boolean
   }
 `;

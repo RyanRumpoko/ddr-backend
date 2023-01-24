@@ -1,5 +1,4 @@
 const bcrypt = require("bcryptjs");
-
 const { validateLoginInput } = require("../../util/validators");
 const { generateToken } = require("../../util/token");
 const checkAuth = require("../../util/checkauth");
@@ -9,6 +8,16 @@ const getAllUsers = async (_, __, { req }) => {
   try {
     checkAuth(req);
     return await User.find().sort({ createdAt: 1 });
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
+const getUserById = async (_, { _id }, { req }) => {
+  try {
+    checkAuth(req);
+    return await User.findById(_id);
   } catch (error) {
     console.log(error);
     throw error;
@@ -34,6 +43,7 @@ const addUser = async (_, { input: { username, password, role } }, { req }) => {
     const newUser = new User({
       username: username.toLowerCase(),
       password,
+      role,
     });
     const res = await newUser.save();
 
@@ -101,13 +111,35 @@ const logout = async (_, { input: { _id } }) => {
   }
 };
 
+const changePassword = async (_, { input: { _id, password } }, { req }) => {
+  try {
+    checkAuth(req);
+
+    const newPassword = await bcrypt.hash(password, 12);
+    await User.findByIdAndUpdate(
+      _id,
+      {
+        password: newPassword,
+      },
+      { new: true }
+    );
+
+    return true;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
 module.exports = {
   Query: {
     getAllUsers,
+    getUserById,
   },
   Mutation: {
     login,
     logout,
     addUser,
+    changePassword,
   },
 };

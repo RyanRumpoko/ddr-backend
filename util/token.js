@@ -7,8 +7,10 @@ const generateToken = (user) => {
       {
         _id: user._id,
         username: user.username,
+        role: user.role,
       },
-      process.env.SECRET_KEY
+      process.env.SECRET_KEY,
+      { expiresIn: "10h" }
     );
   } catch (error) {
     throw error;

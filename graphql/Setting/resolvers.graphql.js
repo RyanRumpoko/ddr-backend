@@ -44,11 +44,38 @@ const getTotalAllSettingService = async (_, __, { req }) => {
   }
 };
 
+const addSettingService = async (_, { input }, { req }) => {
+  try {
+    checkAuth(req);
+    const { service_name, base_price, service_type } = input;
+    const setting = await SettingService.findOne({ service_name });
+    if (setting) {
+      throw new Error("Nama service sudah ada");
+    }
+
+    const newSettingService = new SettingService({
+      service_name: service_name.toLowerCase(),
+      base_price,
+      service_type,
+    });
+    const res = await newSettingService.save();
+
+    return {
+      ...res._doc,
+    };
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
 module.exports = {
   Query: {
     getAllSettingService,
     getAllSettingServicePagination,
     getTotalAllSettingService,
   },
-  Mutation: {},
+  Mutation: {
+    addSettingService,
+  },
 };

@@ -2,281 +2,337 @@
   {
     "service_name": "rack steer",
     "base_price": 800000,
-    "is_active": true
+    "is_active": true,
+    "service_type": "service"
   },
   {
     "service_name": "tie rod",
     "base_price": 100000,
-    "is_active": true
+    "is_active": true,
+    "service_type": "service"
   },
   {
     "service_name": "tie rod baru (L)",
     "base_price": 0,
-    "is_active": true
+    "is_active": true,
+    "service_type": "non-service"
   },
   {
     "service_name": "tie rod baru (R)",
     "base_price": 0,
-    "is_active": true
+    "is_active": true,
+    "service_type": "non-service"
   },
   {
     "service_name": "long tie rod",
     "base_price": 100000,
-    "is_active": true
+    "is_active": true,
+    "service_type": "service"
   },
   {
     "service_name": "long tie rod baru (L)",
     "base_price": 0,
-    "is_active": true
+    "is_active": true,
+    "service_type": "non-service"
   },
   {
     "service_name": "long tie rod baru (R)",
     "base_price": 0,
-    "is_active": true
+    "is_active": true,
+    "service_type": "non-service"
   },
   {
     "service_name": "ball joint",
     "base_price": 100000,
-    "is_active": true
+    "is_active": true,
+    "service_type": "service"
   },
   {
     "service_name": "ball joint baru (L)",
     "base_price": 0,
-    "is_active": true
+    "is_active": true,
+    "service_type": "non-service"
   },
   {
     "service_name": "ball joint baru (R)",
     "base_price": 0,
-    "is_active": true
+    "is_active": true,
+    "service_type": "non-service"
   },
   {
     "service_name": "link stabil",
     "base_price": 100000,
-    "is_active": true
+    "is_active": true,
+    "service_type": "service"
   },
   {
-    "service_name": "link stabil (L)",
+    "service_name": "link stabil baru (L)",
     "base_price": 0,
-    "is_active": true
+    "is_active": true,
+    "service_type": "non-service"
   },
   {
-    "service_name": "link stabil (R)",
+    "service_name": "link stabil baru (R)",
     "base_price": 0,
-    "is_active": true
+    "is_active": true,
+    "service_type": "non-service"
   },
   {
     "service_name": "bushing arm big",
     "base_price": 0,
-    "is_active": true
+    "is_active": true,
+    "service_type": "non-service"
   },
   {
     "service_name": "bushing arm small",
     "base_price": 0,
-    "is_active": true
+    "is_active": true,
+    "service_type": "non-service"
   },
   {
     "service_name": "bushing beam",
     "base_price": 0,
-    "is_active": true
+    "is_active": true,
+    "service_type": "non-service"
   },
   {
     "service_name": "karet stabil",
     "base_price": 0,
-    "is_active": true
+    "is_active": true,
+    "service_type": "non-service"
   },
   {
     "service_name": "karet stutbar",
     "base_price": 0,
-    "is_active": true
+    "is_active": true,
+    "service_type": "non-service"
   },
   {
     "service_name": "karet gromet",
     "base_price": 0,
-    "is_active": true
+    "is_active": true,
+    "service_type": "non-service"
   },
   {
     "service_name": "bushing crossmember big",
     "base_price": 0,
-    "is_active": true
+    "is_active": true,
+    "service_type": "non-service"
   },
   {
     "service_name": "bushing crossmember small",
     "base_price": 0,
-    "is_active": true
+    "is_active": true,
+    "service_type": "non-service"
   },
   {
     "service_name": "engine mounting kanan",
     "base_price": 0,
-    "is_active": true
+    "is_active": true,
+    "service_type": "non-service"
   },
   {
     "service_name": "engine mounting kiri",
     "base_price": 0,
-    "is_active": true
+    "is_active": true,
+    "service_type": "non-service"
   },
   {
     "service_name": "engine mounting depan",
     "base_price": 0,
-    "is_active": true
+    "is_active": true,
+    "service_type": "non-service"
   },
   {
     "service_name": "engine mounting belakang",
     "base_price": 0,
-    "is_active": true
+    "is_active": true,
+    "service_type": "non-service"
   },
   {
     "service_name": "engine mounting transmisi",
     "base_price": 0,
-    "is_active": true
+    "is_active": true,
+    "service_type": "non-service"
   },
   {
     "service_name": "support",
     "base_price": 0,
-    "is_active": true
+    "is_active": true,
+    "service_type": "non-service"
   },
   {
     "service_name": "bearing support",
     "base_price": 0,
-    "is_active": true
+    "is_active": true,
+    "service_type": "non-service"
   },
   {
     "service_name": "link comp (L)",
     "base_price": 0,
-    "is_active": true
+    "is_active": true,
+    "service_type": "non-service"
   },
   {
     "service_name": "link comp (R)",
     "base_price": 0,
-    "is_active": true
+    "is_active": true,
+    "service_type": "non-service"
   },
   {
     "service_name": "as roda luar (L)",
     "base_price": 0,
-    "is_active": true
+    "is_active": true,
+    "service_type": "non-service"
   },
   {
     "service_name": "as roda luar (R)",
     "base_price": 0,
-    "is_active": true
+    "is_active": true,
+    "service_type": "non-service"
   },
   {
     "service_name": "bearing roda depan (L)",
     "base_price": 0,
-    "is_active": true
+    "is_active": true,
+    "service_type": "non-service"
   },
   {
     "service_name": "bearing roda depan (R)",
     "base_price": 0,
-    "is_active": true
+    "is_active": true,
+    "service_type": "non-service"
   },
   {
     "service_name": "bearing roda belakang (L)",
     "base_price": 0,
-    "is_active": true
+    "is_active": true,
+    "service_type": "non-service"
   },
   {
     "service_name": "bearing roda belakang (R)",
     "base_price": 0,
-    "is_active": true
+    "is_active": true,
+    "service_type": "non-service"
   },
   {
     "service_name": "as roda / cv joint (L)",
     "base_price": 0,
-    "is_active": true
+    "is_active": true,
+    "service_type": "non-service"
   },
   {
     "service_name": "as roda / cv joint (R)",
     "base_price": 0,
-    "is_active": true
+    "is_active": true,
+    "service_type": "non-service"
   },
   {
     "service_name": "karet boot as roda",
     "base_price": 0,
-    "is_active": true
+    "is_active": true,
+    "service_type": "non-service"
   },
   {
     "service_name": "karet boot long",
     "base_price": 0,
-    "is_active": true
+    "is_active": true,
+    "service_type": "non-service"
   },
   {
     "service_name": "karet boot shock",
     "base_price": 0,
-    "is_active": true
+    "is_active": true,
+    "service_type": "non-service"
   },
   {
     "service_name": "bushing flexible",
     "base_price": 0,
-    "is_active": true
+    "is_active": true,
+    "service_type": "non-service"
   },
   {
     "service_name": "shock depan baru",
     "base_price": 0,
-    "is_active": true
+    "is_active": true,
+    "service_type": "non-service"
   },
   {
     "service_name": "shock belakang baru",
     "base_price": 0,
-    "is_active": true
+    "is_active": true,
+    "service_type": "non-service"
   },
   {
     "service_name": "idler arm",
     "base_price": 0,
-    "is_active": true
+    "is_active": true,
+    "service_type": "non-service"
   },
   {
     "service_name": "pitman arm",
     "base_price": 0,
-    "is_active": true
+    "is_active": true,
+    "service_type": "non-service"
   },
   {
     "service_name": "stopper depan",
     "base_price": 0,
-    "is_active": true
+    "is_active": true,
+    "service_type": "non-service"
   },
   {
     "service_name": "stopper belakang",
     "base_price": 0,
-    "is_active": true
+    "is_active": true,
+    "service_type": "non-service"
   },
   {
     "service_name": "kampas rem depan",
     "base_price": 0,
-    "is_active": true
+    "is_active": true,
+    "service_type": "non-service"
   },
   {
     "service_name": "kampas rem belakang",
     "base_price": 0,
-    "is_active": true
+    "is_active": true,
+    "service_type": "non-service"
   },
   {
     "service_name": "jasa bongkar pasang depan",
     "base_price": 0,
-    "is_active": true
+    "is_active": true,
+    "service_type": "service"
   },
   {
     "service_name": "jasa bongkar pasang belakang",
     "base_price": 0,
-    "is_active": true
+    "is_active": true,
+    "service_type": "service"
   },
   {
     "service_name": "jasa bongkar pasang engine mounting",
     "base_price": 0,
-    "is_active": true
+    "is_active": true,
+    "service_type": "service"
   },
   {
     "service_name": "jasa bongkar pasang bearing roda",
     "base_price": 0,
-    "is_active": true
+    "is_active": true,
+    "service_type": "service"
   },
   {
     "service_name": "jasa bongkar pasang shock / support",
     "base_price": 0,
-    "is_active": true
+    "is_active": true,
+    "service_type": "service"
   },
   {
     "service_name": "jasa bongkar pasang boot as roda",
     "base_price": 0,
-    "is_active": true
+    "is_active": true,
+    "service_type": "service"
   }
 ]

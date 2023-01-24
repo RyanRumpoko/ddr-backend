@@ -17,6 +17,10 @@ const settingServiceSchema = new Schema(
       required: true,
       default: true,
     },
+    service_type: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true }
 );

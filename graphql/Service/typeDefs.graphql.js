@@ -46,6 +46,7 @@ module.exports = gql`
     getInvoiceByCustomerId(id: ID): [Invoice]
     getAllInvoicesByMonth(input: GetAllInvoiceByMonth): Int!
     getServicesByInvoiceId(id: ID): [Service]
+    getTotalInvoicesToday: Int!
   }
   type Mutation {
     addService(input: ServiceInput): Service!
