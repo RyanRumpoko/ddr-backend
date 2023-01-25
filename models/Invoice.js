@@ -24,6 +24,9 @@ const invoiceSchema = new Schema(
     ongoing_date: {
       type: Date,
     },
+    total_invoice: {
+      type: Number,
+    },
   },
   { timestamps: true }
 );

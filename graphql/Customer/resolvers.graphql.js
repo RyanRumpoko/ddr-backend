@@ -1,5 +1,6 @@
 const checkAuth = require("../../util/checkauth");
 const Customer = require("../../models/Customer");
+const { validateCustomerInput } = require("../../util/validators");
 
 const getAllCustomers = async (_, __, { req }) => {
   try {
@@ -25,7 +26,7 @@ const addCustomer = async (_, { input }, { req }) => {
       plate_number,
     } = input;
 
-    const customer = await Customer.find({ plate_number });
+    const customer = await Customer.findOne({ plate_number });
     if (customer) {
       throw new Error("Plate nomor sudah di registrasi");
     }
@@ -39,17 +40,21 @@ const addCustomer = async (_, { input }, { req }) => {
       changeNumber = phone_number;
     }
 
-    if (phone_number.trim().indexOf(" ") >= 0) {
-      throw new Error("Nomor telepon tidak boleh ada spasi");
-    }
-    if (year.trim().indexOf(" ") >= 0) {
-      throw new Error("Tahun tidak boleh ada spasi");
-    }
-    if (color.trim().indexOf(" ") >= 0) {
-      throw new Error("Warna tidak boleh ada spasi");
-    }
-    if (plate_number.trim().indexOf(" ") >= 0) {
-      throw new Error("Nomor polisi tidak boleh ada spasi");
+    const { errors, valid } = validateCustomerInput(
+      name,
+      phone_number,
+      brand,
+      type,
+      year,
+      transmission,
+      color,
+      plate_number
+    );
+    if (!valid) {
+      const newErrors = Object.values(errors);
+      newErrors.forEach((el) => {
+        throw new Error(el);
+      });
     }
 
     const newCustomer = new Customer({

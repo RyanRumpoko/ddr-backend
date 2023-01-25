@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon server.js",
-    "populateSettingService": "node populates/populateSettingService.js"
-
+    "populateSettingService": "node populates/populateSettingService.js",
+    "populateAdmin": "node populates/populateAdmin.js"
   },
   "keywords": [],
   "author": "",
