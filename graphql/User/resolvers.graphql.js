@@ -60,7 +60,10 @@ const login = async (_, { input: { username, password } }) => {
   try {
     const { errors, valid } = validateLoginInput(username, password);
     if (!valid) {
-      throw new Error("Errors");
+      const newErrors = Object.values(errors);
+      newErrors.forEach((el) => {
+        throw new Error(el);
+      });
     }
 
     const user = await User.findOne({
