@@ -26,7 +26,9 @@ const addCustomer = async (_, { input }, { req }) => {
       plate_number,
     } = input;
 
-    const customer = await Customer.findOne({ plate_number });
+    const customer = await Customer.findOne({
+      plate_number: plate_number.trim().toLowerCase(),
+    });
     if (customer) {
       throw new Error("Plate nomor sudah di registrasi");
     }

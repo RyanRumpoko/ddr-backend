@@ -36,7 +36,7 @@ const getServicesByInvoiceId = async (_, { id }, { req }) => {
 const addService = async (_, { input }, { req }) => {
   try {
     checkAuth(req);
-    const { service_name, quantity, price, total, invoice_id } = input;
+    const { service_name, quantity, price, total, invoice_id, is_disc } = input;
 
     const { errors, valid } = validateServiceInput(
       service_name,
@@ -62,7 +62,13 @@ const addService = async (_, { input }, { req }) => {
     const res = await newService.save();
 
     const getInvoice = await Invoice.findById(invoice_id).exec();
-    const updatedTotalInvoice = getInvoice.total_invoice + total;
+    let updatedTotalInvoice = 0;
+
+    if (is_disc) {
+      updatedTotalInvoice = getInvoice.total_invoice - total;
+    } else {
+      updatedTotalInvoice = getInvoice.total_invoice + total;
+    }
 
     await Invoice.findByIdAndUpdate(
       {
@@ -86,7 +92,7 @@ const addService = async (_, { input }, { req }) => {
 const updateService = async (_, { input }, { req }) => {
   try {
     checkAuth(req);
-    const { _id, service_name, quantity, price, total } = input;
+    const { _id, service_name, quantity, price, total, is_disc } = input;
 
     const { errors, valid } = validateServiceInput(
       service_name,
@@ -103,8 +109,13 @@ const updateService = async (_, { input }, { req }) => {
 
     const getService = await Service.findById(_id).exec();
     const getInvoice = await Invoice.findById(getService.invoice_id).exec();
-    const updatedTotalInvoice =
-      getInvoice.total_invoice - getService.total + total;
+    let updatedTotalInvoice = 0;
+
+    if (is_disc) {
+      updatedTotalInvoice = getInvoice.total_invoice + getService.total - total;
+    } else {
+      updatedTotalInvoice = getInvoice.total_invoice - getService.total + total;
+    }
 
     const updateService = await Service.findByIdAndUpdate(
       { _id },
@@ -129,12 +140,18 @@ const updateService = async (_, { input }, { req }) => {
   }
 };
 
-const deleteService = async (_, { id }, { req }) => {
+const deleteService = async (_, { id, is_disc }, { req }) => {
   try {
     checkAuth(req);
     const getService = await Service.findById(id).exec();
     const getInvoice = await Invoice.findById(getService.invoice_id).exec();
-    const updatedTotalInvoice = getInvoice.total_invoice - getService.total;
+    let updatedTotalInvoice = getInvoice.total_invoice - getService.total;
+
+    if (is_disc) {
+      updatedTotalInvoice = getInvoice.total_invoice + getService.total;
+    } else {
+      updatedTotalInvoice = getInvoice.total_invoice - getService.total;
+    }
 
     await Invoice.findByIdAndUpdate(
       {

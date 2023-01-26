@@ -8,6 +8,7 @@ const mongoose = require("mongoose");
 const { json } = require("body-parser");
 const { mergeResolvers, mergeTypeDefs } = require("@graphql-tools/merge");
 const { loadFilesSync } = require("@graphql-tools/load-files");
+const router = require("./routes/index");
 require("dotenv").config();
 mongoose.set("strictQuery", true);
 
@@ -37,6 +38,10 @@ const startServer = async () => {
       context: async ({ req }) => ({ req }),
     })
   );
+  app.use(cors());
+  app.use(express.urlencoded({ extended: true }));
+  app.use(express.json({ limit: "50mb" }));
+  app.use("/", router);
 };
 startServer();
 
