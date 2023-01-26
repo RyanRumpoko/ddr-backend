@@ -33,6 +33,7 @@ module.exports = gql`
     price: Int
     total: Int
     invoice_id: ID
+    is_disc: Boolean
   }
   input InvoiceInput {
     invoice_number: String
@@ -50,6 +51,7 @@ module.exports = gql`
     quantity: Int
     price: Int
     total: Int
+    is_disc: Boolean
   }
 
   type Query {
@@ -65,6 +67,6 @@ module.exports = gql`
     addService(input: ServiceInput): Service!
     addInvoice(input: InvoiceInput): Boolean!
     updateService(input: UpdateServiceInput): Service!
-    deleteService(id: ID): Boolean!
+    deleteService(id: ID, is_disc: Boolean): Boolean!
   }
 `;
