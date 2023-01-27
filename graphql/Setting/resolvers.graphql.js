@@ -82,6 +82,37 @@ const getAllSettingBrand = async (_, __, { req }) => {
   }
 };
 
+const getAllSettingBrandPagination = async (_, { input }, { req }) => {
+  try {
+    checkAuth(req);
+    const { page, perPage } = input;
+    let startIndex = Math.abs(page - 1) * perPage;
+    return await SettingBrand.find({
+      is_active: true,
+    })
+      .lean()
+      .sort({ createdAt: 1 })
+      .limit(perPage)
+      .skip(startIndex)
+      .exec();
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
+const getTotalAllSettingBrand = async (_, __, { req }) => {
+  try {
+    checkAuth(req);
+    return await SettingBrand.countDocuments({
+      is_active: true,
+    });
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
 const addSettingBrand = async (_, { input }, { req }) => {
   try {
     checkAuth(req);
@@ -112,6 +143,8 @@ module.exports = {
     getAllSettingServicePagination,
     getTotalAllSettingService,
     getAllSettingBrand,
+    getAllSettingBrandPagination,
+    getTotalAllSettingBrand,
   },
   Mutation: {
     addSettingService,
