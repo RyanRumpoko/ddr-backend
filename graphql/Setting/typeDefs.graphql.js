@@ -32,6 +32,11 @@ module.exports = gql`
   }
   input SettingBrandInput {
     brand_name: String
+    is_active: Boolean
+  }
+  input GetSettingBrandPagination {
+    page: Int!
+    perPage: Int!
   }
 
   type Query {
@@ -41,6 +46,10 @@ module.exports = gql`
     ): [SettingService]
     getTotalAllSettingService: Int!
     getAllSettingBrand: [SettingBrand]
+    getAllSettingBrandPagination(
+      input: GetSettingBrandPagination
+    ): [SettingBrand]
+    getTotalAllSettingBrand: Int!
   }
   type Mutation {
     addSettingService(input: SettingServiceInput): SettingService!

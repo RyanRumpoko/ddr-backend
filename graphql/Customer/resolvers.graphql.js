@@ -165,11 +165,70 @@ const searchCustomer = async (_, { input }, { req }) => {
       });
     }
 
-    const searchResult = await Customer.find({
+    let startIndex = Math.abs(input.page - 1) * input.perPage;
+    const totalSearchData = await Customer.countDocuments({
       $and: filterObject,
     });
+    const searchData = await Customer.find({
+      $and: filterObject,
+    })
+      .lean()
+      .sort({ createdAt: 1 })
+      .limit(input.perPage)
+      .skip(startIndex)
+      .exec();
+    const searchResult = {
+      totalSearchData,
+      searchData,
+    };
 
     return searchResult;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
+const getCustomersPaginationByMonth = async (_, { input }, { req }) => {
+  try {
+    checkAuth(req);
+    const { page, perPage, this_month } = input;
+    const changeInputStart = this_month + "-01T00:00:01";
+    const changeInputEnd = this_month + "-31T23:59:59";
+    let startIndex = Math.abs(page - 1) * perPage;
+
+    return await Customer.find({
+      is_active: true,
+      createdAt: {
+        $gte: new Date(changeInputStart),
+        $lte: new Date(changeInputEnd),
+      },
+    })
+      .lean()
+      .sort({ createdAt: 1 })
+      .limit(perPage)
+      .skip(startIndex)
+      .exec();
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
+const getTotalCustomersPaginationByMonth = async (_, { input }, { req }) => {
+  try {
+    checkAuth(req);
+    const { this_month } = input;
+    const changeInputStart = this_month + "-01T00:00:01";
+    const changeInputEnd = this_month + "-31T23:59:59";
+
+    return await Customer.countDocuments({
+      is_active: true,
+      createdAt: {
+        $gte: new Date(changeInputStart),
+        $lte: new Date(changeInputEnd),
+      },
+    });
   } catch (error) {
     console.log(error);
     throw error;
@@ -180,6 +239,8 @@ module.exports = {
   Query: {
     getAllCustomers,
     searchCustomer,
+    getCustomersPaginationByMonth,
+    getTotalCustomersPaginationByMonth,
   },
   Mutation: {
     addCustomer,

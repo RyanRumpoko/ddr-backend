@@ -1,0 +1,134 @@
+[
+  {
+    "brand_name": "hyundai",
+    "is_active": true
+  },
+  {
+    "brand_name": "toyota",
+    "is_active": true
+  },
+  {
+    "brand_name": "daihatsu",
+    "is_active": true
+  },
+  {
+    "brand_name": "honda",
+    "is_active": true
+  },
+  {
+    "brand_name": "mitsubishi",
+    "is_active": true
+  },
+  {
+    "brand_name": "suzuki",
+    "is_active": true
+  },
+  {
+    "brand_name": "wuling",
+    "is_active": true
+  },
+  {
+    "brand_name": "nissan",
+    "is_active": true
+  },
+  {
+    "brand_name": "volvo",
+    "is_active": true
+  },
+  {
+    "brand_name": "mazda",
+    "is_active": true
+  },
+  {
+    "brand_name": "subaru",
+    "is_active": true
+  },
+  {
+    "brand_name": "mercedes-benz",
+    "is_active": true
+  },
+  {
+    "brand_name": "renault",
+    "is_active": true
+  },
+  {
+    "brand_name": "isuzu",
+    "is_active": true
+  },
+  {
+    "brand_name": "kia",
+    "is_active": true
+  },
+  {
+    "brand_name": "lexus",
+    "is_active": true
+  },
+  {
+    "brand_name": "mini",
+    "is_active": true
+  },
+  {
+    "brand_name": "bmw",
+    "is_active": true
+  },
+  {
+    "brand_name": "volkswagen",
+    "is_active": true
+  },
+  {
+    "brand_name": "peugeot",
+    "is_active": true
+  },
+  {
+    "brand_name": "jeep",
+    "is_active": true
+  },
+  {
+    "brand_name": "audi",
+    "is_active": true
+  },
+  {
+    "brand_name": "maserati",
+    "is_active": true
+  },
+  {
+    "brand_name": "mahindra",
+    "is_active": true
+  },
+  {
+    "brand_name": "ford",
+    "is_active": true
+  },
+  {
+    "brand_name": "mg",
+    "is_active": true
+  },
+  {
+    "brand_name": "tata",
+    "is_active": true
+  },
+  {
+    "brand_name": "dfsk",
+    "is_active": true
+  },
+  {
+    "brand_name": "jaguar",
+    "is_active": true
+  },
+  {
+    "brand_name": "chery",
+    "is_active": true
+  },
+  {
+    "brand_name": "citroen",
+    "is_active": true
+  },
+  {
+    "brand_name": "fuso",
+    "is_active": true
+  },
+  {
+    "brand_name": "chevrolet",
+    "is_active": true
+  }
+]
