@@ -26,6 +26,10 @@ module.exports = gql`
   input GetAllInvoiceByMonth {
     this_month: DateTime
   }
+  input UpdateStatusInput {
+    _id: ID
+    status: String
+  }
 
   type Query {
     getAllInvoices: [Invoice]
@@ -35,5 +39,6 @@ module.exports = gql`
   }
   type Mutation {
     addInvoice(input: InvoiceInput): Boolean!
+    updateStatus(input: UpdateStatusInput): Invoice!
   }
 `;

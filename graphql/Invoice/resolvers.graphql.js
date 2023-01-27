@@ -88,6 +88,26 @@ const getTotalInvoicesToday = async (_, __, { req }) => {
   }
 };
 
+const updateStatus = async (_, { input }, { req }) => {
+  try {
+    checkAuth(req);
+    const { _id, status } = input;
+    const updatedStatus = await Invoice.findByIdAndUpdate(
+      {
+        _id,
+      },
+      {
+        status,
+      },
+      { new: true }
+    );
+    return updatedStatus;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
 module.exports = {
   Query: {
     getAllInvoices,
@@ -97,5 +117,6 @@ module.exports = {
   },
   Mutation: {
     addInvoice,
+    updateStatus,
   },
 };
