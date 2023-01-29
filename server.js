@@ -46,7 +46,7 @@ const startServer = async () => {
 startServer();
 
 mongoose
-  .connect(process.env.DATABASE_ATLAS, {
+  .connect(process.env.DATABASE_LOCAL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })

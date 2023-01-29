@@ -6,7 +6,7 @@ function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 mongoose.connect(
-  process.env.DATABASE_ATLAS,
+  process.env.DATABASE_LOCAL,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
