@@ -235,14 +235,89 @@ const getTotalCustomersPaginationByMonth = async (_, { input }, { req }) => {
   }
 };
 
+const getCustomerById = async (_, { _id }, { req }) => {
+  try {
+    checkAuth(req);
+    return await Customer.findById(_id);
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
+const updateCustomer = async (_, { input }, { req }) => {
+  try {
+    checkAuth(req);
+    const {
+      _id,
+      name,
+      phone_number,
+      brand,
+      type,
+      year,
+      transmission,
+      color,
+      plate_number,
+    } = input;
+
+    const customer = await Customer.findOne({
+      plate_number: plate_number.trim().toLowerCase(),
+    });
+    if (customer && customer._id !== _id) {
+      throw new Error("Plate nomor ini sudah teregistrasi");
+    }
+
+    let changeNumber;
+    if (phone_number[0] === "0") {
+      changeNumber = phone_number.slice(1);
+    } else if (phone_number[0] === "6" && phone_number[1] === "2") {
+      changeNumber = phone_number.slice(2);
+    } else if (phone_number[0] !== "0") {
+      changeNumber = phone_number;
+    }
+
+    const { errors, valid } = validateCustomerInput(
+      name,
+      phone_number,
+      brand,
+      type,
+      year,
+      transmission,
+      color,
+      plate_number
+    );
+    if (!valid) {
+      const newErrors = Object.values(errors);
+      newErrors.forEach((el) => {
+        throw new Error(el);
+      });
+    }
+
+    let processData = input;
+    const updatedCustomer = await Customer.findByIdAndUpdate(
+      { _id: _id },
+      {
+        $set: processData,
+      },
+      { new: true }
+    );
+    return updatedCustomer;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
 module.exports = {
   Query: {
     getAllCustomers,
     searchCustomer,
     getCustomersPaginationByMonth,
     getTotalCustomersPaginationByMonth,
+    getCustomerById,
   },
   Mutation: {
     addCustomer,
+    updateCustomer,
   },
 };
