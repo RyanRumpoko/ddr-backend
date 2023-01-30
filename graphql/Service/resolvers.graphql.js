@@ -16,7 +16,7 @@ const getAllServices = async (_, __, { req }) => {
 const getServiceById = async (_, { id }, { req }) => {
   try {
     checkAuth(req);
-    return await Service.findById({ _id: id });
+    return await Service.findById({ _id: id }).populate("service_name");
   } catch (error) {
     console.log(error);
     throw error;
@@ -26,7 +26,9 @@ const getServiceById = async (_, { id }, { req }) => {
 const getServicesByInvoiceId = async (_, { id }, { req }) => {
   try {
     checkAuth(req);
-    return await Service.find({ invoice_id: id }).sort({ createdAt: 1 });
+    return await Service.find({ invoice_id: id })
+      .sort({ createdAt: 1 })
+      .populate("service_name");
   } catch (error) {
     console.log(error);
     throw error;
@@ -52,7 +54,7 @@ const addService = async (_, { input }, { req }) => {
     }
 
     const newService = new Service({
-      service_name: service_name.toLowerCase(),
+      service_name,
       quantity,
       price,
       total,

@@ -16,6 +16,14 @@ module.exports = gql`
     updatedAt: DateTime
   }
 
+  input ServiceInput {
+    service_name: ID
+    quantity: Int
+    price: Int
+    total: Int
+    invoice_id: ID
+    is_disc: Boolean
+  }
   input InvoiceInput {
     invoice_number: String
     service_bulk: [ServiceInput]

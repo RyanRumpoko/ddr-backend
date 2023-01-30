@@ -1,7 +1,6 @@
 const checkAuth = require("../../util/checkauth");
 const Service = require("../../models/Service");
 const Invoice = require("../../models/Invoice");
-const { validateServiceInput } = require("../../util/validators");
 
 const getAllInvoices = async (_, __, { req }) => {
   try {
@@ -79,9 +78,15 @@ const addInvoiceBefore = async (_, { input }, { req }) => {
       estimated_date,
       ongoing_date,
     } = input;
+    const customer = await Invoice.findOne({
+      invoice_number: invoice_number.toUpperCase(),
+    });
+    if (customer) {
+      throw new Error("Nomor invoice sudah di registrasi");
+    }
 
     const newInvoice = new Invoice({
-      invoice_number,
+      invoice_number: invoice_number.trim().toUpperCase(),
       customer_id,
       status: "done",
       estimated_date,
