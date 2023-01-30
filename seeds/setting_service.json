@@ -12,13 +12,13 @@
     "service_type": "service"
   },
   {
-    "service_name": "tie rod baru (L)",
+    "service_name": "tie rod baru (l)",
     "base_price": 0,
     "is_active": true,
     "service_type": "non-service"
   },
   {
-    "service_name": "tie rod baru (R)",
+    "service_name": "tie rod baru (r)",
     "base_price": 0,
     "is_active": true,
     "service_type": "non-service"
@@ -30,13 +30,13 @@
     "service_type": "service"
   },
   {
-    "service_name": "long tie rod baru (L)",
+    "service_name": "long tie rod baru (l)",
     "base_price": 0,
     "is_active": true,
     "service_type": "non-service"
   },
   {
-    "service_name": "long tie rod baru (R)",
+    "service_name": "long tie rod baru (r)",
     "base_price": 0,
     "is_active": true,
     "service_type": "non-service"
@@ -48,13 +48,13 @@
     "service_type": "service"
   },
   {
-    "service_name": "ball joint baru (L)",
+    "service_name": "ball joint baru (l)",
     "base_price": 0,
     "is_active": true,
     "service_type": "non-service"
   },
   {
-    "service_name": "ball joint baru (R)",
+    "service_name": "ball joint baru (r)",
     "base_price": 0,
     "is_active": true,
     "service_type": "non-service"
@@ -66,13 +66,13 @@
     "service_type": "service"
   },
   {
-    "service_name": "link stabil baru (L)",
+    "service_name": "link stabil baru (l)",
     "base_price": 0,
     "is_active": true,
     "service_type": "non-service"
   },
   {
-    "service_name": "link stabil baru (R)",
+    "service_name": "link stabil baru (r)",
     "base_price": 0,
     "is_active": true,
     "service_type": "non-service"
@@ -168,61 +168,61 @@
     "service_type": "non-service"
   },
   {
-    "service_name": "link comp (L)",
+    "service_name": "link comp (l)",
     "base_price": 0,
     "is_active": true,
     "service_type": "non-service"
   },
   {
-    "service_name": "link comp (R)",
+    "service_name": "link comp (r)",
     "base_price": 0,
     "is_active": true,
     "service_type": "non-service"
   },
   {
-    "service_name": "as roda luar (L)",
+    "service_name": "as roda luar (l)",
     "base_price": 0,
     "is_active": true,
     "service_type": "non-service"
   },
   {
-    "service_name": "as roda luar (R)",
+    "service_name": "as roda luar (r)",
     "base_price": 0,
     "is_active": true,
     "service_type": "non-service"
   },
   {
-    "service_name": "bearing roda depan (L)",
+    "service_name": "bearing roda depan (l)",
     "base_price": 0,
     "is_active": true,
     "service_type": "non-service"
   },
   {
-    "service_name": "bearing roda depan (R)",
+    "service_name": "bearing roda depan (r)",
     "base_price": 0,
     "is_active": true,
     "service_type": "non-service"
   },
   {
-    "service_name": "bearing roda belakang (L)",
+    "service_name": "bearing roda belakang (l)",
     "base_price": 0,
     "is_active": true,
     "service_type": "non-service"
   },
   {
-    "service_name": "bearing roda belakang (R)",
+    "service_name": "bearing roda belakang (r)",
     "base_price": 0,
     "is_active": true,
     "service_type": "non-service"
   },
   {
-    "service_name": "as roda / cv joint (L)",
+    "service_name": "as roda / cv joint (l)",
     "base_price": 0,
     "is_active": true,
     "service_type": "non-service"
   },
   {
-    "service_name": "as roda / cv joint (R)",
+    "service_name": "as roda / cv joint (r)",
     "base_price": 0,
     "is_active": true,
     "service_type": "non-service"

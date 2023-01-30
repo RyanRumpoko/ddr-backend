@@ -52,6 +52,17 @@ module.exports = gql`
   input GetTotalCustomersPaginationByMonthInput {
     this_month: DateTime
   }
+  input UpdateCustomerInput {
+    _id: ID
+    name: String
+    phone_number: String
+    brand: String
+    type: String
+    year: String
+    transmission: String
+    color: String
+    plate_number: String
+  }
 
   type Query {
     getAllCustomers: [Customer]
@@ -62,8 +73,10 @@ module.exports = gql`
     getTotalCustomersPaginationByMonth(
       input: GetTotalCustomersPaginationByMonthInput
     ): Int!
+    getCustomerById(_id: ID): Customer!
   }
   type Mutation {
     addCustomer(input: CustomerInput): Customer!
+    updateCustomer(input: UpdateCustomerInput): Customer!
   }
 `;

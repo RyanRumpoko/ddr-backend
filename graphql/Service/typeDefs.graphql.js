@@ -6,7 +6,7 @@ module.exports = gql`
 
   type Service {
     _id: ID
-    service_name: String
+    service_name: SettingService
     quantity: Int
     price: Int
     invoice_id: Invoice
@@ -16,7 +16,7 @@ module.exports = gql`
   }
 
   input ServiceInput {
-    service_name: String
+    service_name: ID
     quantity: Int
     price: Int
     total: Int
@@ -25,7 +25,7 @@ module.exports = gql`
   }
   input UpdateServiceInput {
     _id: ID
-    service_name: String
+    service_name: ID
     quantity: Int
     price: Int
     total: Int

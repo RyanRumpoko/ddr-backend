@@ -1,7 +1,6 @@
 const checkAuth = require("../../util/checkauth");
 const Service = require("../../models/Service");
 const Invoice = require("../../models/Invoice");
-const { validateServiceInput } = require("../../util/validators");
 
 const getAllInvoices = async (_, __, { req }) => {
   try {
@@ -68,6 +67,47 @@ const addInvoice = async (_, { input }, { req }) => {
   }
 };
 
+const addInvoiceBefore = async (_, { input }, { req }) => {
+  try {
+    checkAuth(req);
+    const {
+      invoice_number,
+      service_bulk,
+      customer_id,
+      total_invoice,
+      estimated_date,
+      ongoing_date,
+    } = input;
+    const customer = await Invoice.findOne({
+      invoice_number: invoice_number.toUpperCase(),
+    });
+    if (customer) {
+      throw new Error("Nomor invoice sudah di registrasi");
+    }
+
+    const newInvoice = new Invoice({
+      invoice_number: invoice_number.trim().toUpperCase(),
+      customer_id,
+      status: "done",
+      estimated_date,
+      ongoing_date,
+      total_invoice,
+    });
+    const res = newInvoice.save();
+    res.then((doc) => {
+      const insertId = service_bulk.map((x) => ({
+        ...x,
+        invoice_id: doc._id,
+      }));
+      Service.insertMany(insertId);
+    });
+    return true;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
 const getTotalInvoicesToday = async (_, __, { req }) => {
   try {
     checkAuth(req);
@@ -92,16 +132,31 @@ const updateStatus = async (_, { input }, { req }) => {
   try {
     checkAuth(req);
     const { _id, status } = input;
-    const updatedStatus = await Invoice.findByIdAndUpdate(
-      {
-        _id,
-      },
-      {
-        status,
-      },
-      { new: true }
-    );
-    return updatedStatus;
+    if (status === "ongoing" || status === "done") {
+      const updatedStatus = await Invoice.findByIdAndUpdate(
+        {
+          _id,
+        },
+        {
+          status,
+          ongoing_date: new Date(),
+        },
+        { new: true }
+      );
+      return updatedStatus;
+    } else if (status === "canceled") {
+      const updatedStatus = await Invoice.findByIdAndUpdate(
+        {
+          _id,
+        },
+        {
+          status,
+          canceled_date: new Date(),
+        },
+        { new: true }
+      );
+      return updatedStatus;
+    }
   } catch (error) {
     console.log(error);
     throw error;
@@ -117,6 +172,7 @@ module.exports = {
   },
   Mutation: {
     addInvoice,
+    addInvoiceBefore,
     updateStatus,
   },
 };

@@ -4,8 +4,8 @@ const { Schema } = mongoose;
 const serviceSchema = new Schema(
   {
     service_name: {
-      type: String,
-      required: true,
+      type: Schema.Types.ObjectId,
+      ref: "SettingService",
     },
     quantity: {
       type: Number,

@@ -16,6 +16,14 @@ module.exports = gql`
     updatedAt: DateTime
   }
 
+  input ServiceInput {
+    service_name: ID
+    quantity: Int
+    price: Int
+    total: Int
+    invoice_id: ID
+    is_disc: Boolean
+  }
   input InvoiceInput {
     invoice_number: String
     service_bulk: [ServiceInput]
@@ -30,6 +38,15 @@ module.exports = gql`
     _id: ID
     status: String
   }
+  input InvoiceBeforeInput {
+    invoice_number: String
+    service_bulk: [ServiceInput]
+    customer_id: ID
+    status: String
+    total_invoice: Int
+    estimated_date: DateTime
+    ongoing_date: DateTime
+  }
 
   type Query {
     getAllInvoices: [Invoice]
@@ -39,6 +56,7 @@ module.exports = gql`
   }
   type Mutation {
     addInvoice(input: InvoiceInput): Boolean!
+    addInvoiceBefore(input: InvoiceBeforeInput): Boolean!
     updateStatus(input: UpdateStatusInput): Invoice!
   }
 `;
