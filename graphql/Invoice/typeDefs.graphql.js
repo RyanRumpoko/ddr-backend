@@ -53,6 +53,7 @@ module.exports = gql`
     getInvoiceByCustomerId(id: ID): [Invoice]
     getAllInvoicesByMonth(input: GetAllInvoiceByMonth): Int!
     getTotalInvoicesToday: Int!
+    getInvoiceById(_id: ID): Invoice!
   }
   type Mutation {
     addInvoice(input: InvoiceInput): Boolean!

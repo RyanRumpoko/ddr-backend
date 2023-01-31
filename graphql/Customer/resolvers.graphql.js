@@ -260,11 +260,14 @@ const updateCustomer = async (_, { input }, { req }) => {
       plate_number,
     } = input;
 
-    const customer = await Customer.findOne({
-      plate_number: plate_number.trim().toLowerCase(),
-    });
-    if (customer && customer._id !== _id) {
-      throw new Error("Plate nomor ini sudah teregistrasi");
+    const getCustomer = await Customer.findById(_id);
+    if (getCustomer.plate_number !== plate_number.trim().toLowerCase()) {
+      const customer = await Customer.findOne({
+        plate_number: plate_number.trim().toLowerCase(),
+      });
+      if (customer) {
+        throw new Error("Plate nomor sudah di registrasi");
+      }
     }
 
     let changeNumber;
