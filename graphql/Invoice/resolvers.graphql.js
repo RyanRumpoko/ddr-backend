@@ -40,6 +40,16 @@ const getInvoiceByCustomerId = async (_, { id }, { req }) => {
   }
 };
 
+const getInvoiceById = async (_, { _id }, { req }) => {
+  try {
+    checkAuth(req);
+    return await Invoice.findById({ _id }).populate("customer_id");
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
 const addInvoice = async (_, { input }, { req }) => {
   try {
     checkAuth(req);
@@ -169,6 +179,7 @@ module.exports = {
     getInvoiceByCustomerId,
     getAllInvoicesByMonth,
     getTotalInvoicesToday,
+    getInvoiceById,
   },
   Mutation: {
     addInvoice,
