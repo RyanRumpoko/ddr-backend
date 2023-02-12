@@ -118,6 +118,27 @@ const addInvoiceBefore = async (_, { input }, { req }) => {
   }
 };
 
+const addInvoiceNote = async (_, { input }, { req }) => {
+  try {
+    checkAuth(req);
+    const { _id, note } = input;
+
+    const updateNote = await Invoice.findByIdAndUpdate(
+      {
+        _id,
+      },
+      {
+        note,
+      },
+      { new: true }
+    );
+    return updateNote;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
 const getTotalInvoicesToday = async (_, __, { req }) => {
   try {
     checkAuth(req);
@@ -173,6 +194,84 @@ const updateStatus = async (_, { input }, { req }) => {
   }
 };
 
+const searchInvoice = async (_, { input }, { req }) => {
+  try {
+    checkAuth(req);
+    let filterObject = [];
+
+    if (
+      input.estimated_date_min !== null &&
+      input.estimated_date_min !== "" &&
+      input.estimated_date_max !== "" &&
+      input.estimated_date_max >= input.estimated_date_min
+    ) {
+      let start = new Date(input.estimated_date_min);
+      start.setUTCHours(0, 0, 0, 000);
+      let end = new Date(input.estimated_date_max);
+      end.setUTCHours(23, 59, 59, 999);
+      filterObject.push({
+        estimated_date: {
+          $gte: start,
+          $lte: end,
+        },
+      });
+    }
+    if (
+      input.ongoing_date_min !== null &&
+      input.ongoing_date_min !== "" &&
+      input.ongoing_date_max !== "" &&
+      input.ongoing_date_max >= input.ongoing_date_min
+    ) {
+      let start = new Date(input.ongoing_date_min);
+      start.setUTCHours(0, 0, 0, 000);
+      let end = new Date(input.ongoing_date_max);
+      end.setUTCHours(23, 59, 59, 999);
+      filterObject.push({
+        ongoing_date: {
+          $gte: start,
+          $lte: end,
+        },
+      });
+    }
+    if (input.invoice_number !== "") {
+      filterObject.push({
+        invoice_number: {
+          $regex: input.invoice_number.toUpperCase(),
+          $options: "i",
+        },
+      });
+    }
+    if (input.total_invoice > 0) {
+      filterObject.push({
+        total_invoice: input.total_invoice,
+      });
+    }
+    let startIndex = Math.abs(input.page - 1) * input.perPage;
+    const totalSearchData = await Invoice.countDocuments({
+      $and: filterObject,
+    });
+    const searchInvoice = await Invoice.find({
+      $and: filterObject,
+    })
+      .populate("customer_id")
+      .lean()
+      .sort({ createdAt: 1 })
+      .limit(input.perPage)
+      .skip(startIndex)
+      .exec();
+    const searchData = searchInvoice.map((e) => e.customer_id);
+    const searchResult = {
+      totalSearchData,
+      searchData,
+    };
+
+    return searchResult;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
 module.exports = {
   Query: {
     getAllInvoices,
@@ -180,10 +279,12 @@ module.exports = {
     getAllInvoicesByMonth,
     getTotalInvoicesToday,
     getInvoiceById,
+    searchInvoice,
   },
   Mutation: {
     addInvoice,
     addInvoiceBefore,
     updateStatus,
+    addInvoiceNote,
   },
 };

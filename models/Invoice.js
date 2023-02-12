@@ -30,6 +30,9 @@ const invoiceSchema = new Schema(
     total_invoice: {
       type: Number,
     },
+    note: {
+      type: String,
+    },
   },
   { timestamps: true }
 );
