@@ -256,7 +256,7 @@ const searchInvoice = async (_, { input }, { req }) => {
       .populate("customer_id")
       .lean()
       .sort({ createdAt: 1 })
-      .limit(input.perPage)
+      .limit(parseInt(input.perPage))
       .skip(startIndex)
       .exec();
     const searchData = searchInvoice.map((e) => e.customer_id);
