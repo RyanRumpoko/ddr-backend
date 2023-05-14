@@ -19,26 +19,23 @@ const getAllSettingServicePagination = async (_, { input }, { req }) => {
     checkAuth(req);
     const { page, perPage } = input;
     let startIndex = Math.abs(page - 1) * perPage;
-    return await SettingService.find({
+    const totalSearchData = await SettingService.countDocuments({
+      is_active: true,
+    });
+    const searchData = await SettingService.find({
       is_active: true,
     })
       .lean()
       .sort({ createdAt: 1 })
-      .limit(perPage)
+      .limit(parseInt(perPage))
       .skip(startIndex)
       .exec();
-  } catch (error) {
-    console.log(error);
-    throw error;
-  }
-};
+    const searchResult = {
+      totalSearchData,
+      searchData,
+    };
 
-const getTotalAllSettingService = async (_, __, { req }) => {
-  try {
-    checkAuth(req);
-    return await SettingService.countDocuments({
-      is_active: true,
-    });
+    return searchResult;
   } catch (error) {
     console.log(error);
     throw error;
@@ -87,26 +84,23 @@ const getAllSettingBrandPagination = async (_, { input }, { req }) => {
     checkAuth(req);
     const { page, perPage } = input;
     let startIndex = Math.abs(page - 1) * perPage;
-    return await SettingBrand.find({
+    const totalSearchData = await SettingBrand.countDocuments({
+      is_active: true,
+    });
+    const searchData = await SettingBrand.find({
       is_active: true,
     })
       .lean()
       .sort({ createdAt: 1 })
-      .limit(perPage)
+      .limit(parseInt(perPage))
       .skip(startIndex)
       .exec();
-  } catch (error) {
-    console.log(error);
-    throw error;
-  }
-};
+    const searchResult = {
+      totalSearchData,
+      searchData,
+    };
 
-const getTotalAllSettingBrand = async (_, __, { req }) => {
-  try {
-    checkAuth(req);
-    return await SettingBrand.countDocuments({
-      is_active: true,
-    });
+    return searchResult;
   } catch (error) {
     console.log(error);
     throw error;
@@ -141,10 +135,8 @@ module.exports = {
   Query: {
     getAllSettingService,
     getAllSettingServicePagination,
-    getTotalAllSettingService,
     getAllSettingBrand,
     getAllSettingBrandPagination,
-    getTotalAllSettingBrand,
   },
   Mutation: {
     addSettingService,

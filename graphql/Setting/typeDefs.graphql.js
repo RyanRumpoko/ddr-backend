@@ -13,6 +13,10 @@ module.exports = gql`
     createdAt: DateTime
     updatedAt: DateTime
   }
+  type SettingServicePagination {
+    totalSearchData: Int!
+    searchData: [SettingService]
+  }
   type SettingBrand {
     _id: ID
     brand_name: String
@@ -20,7 +24,10 @@ module.exports = gql`
     createdAt: DateTime
     updatedAt: DateTime
   }
-
+  type SettingBrandPagination {
+    totalSearchData: Int!
+    searchData: [SettingBrand]
+  }
   input SettingServiceInput {
     service_name: String
     base_price: Int
@@ -43,13 +50,11 @@ module.exports = gql`
     getAllSettingService: [SettingService]
     getAllSettingServicePagination(
       input: GetSettingServicePagination
-    ): [SettingService]
-    getTotalAllSettingService: Int!
+    ): SettingServicePagination
     getAllSettingBrand: [SettingBrand]
     getAllSettingBrandPagination(
       input: GetSettingBrandPagination
-    ): [SettingBrand]
-    getTotalAllSettingBrand: Int!
+    ): SettingBrandPagination
   }
   type Mutation {
     addSettingService(input: SettingServiceInput): SettingService!
