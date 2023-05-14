@@ -174,7 +174,7 @@ const searchCustomer = async (_, { input }, { req }) => {
     })
       .lean()
       .sort({ createdAt: 1 })
-      .limit(input.perPage)
+      .limit(parseInt(input.perPage))
       .skip(startIndex)
       .exec();
     const searchResult = {
@@ -197,7 +197,14 @@ const getCustomersPaginationByMonth = async (_, { input }, { req }) => {
     const changeInputEnd = this_month + "-31T23:59:59";
     let startIndex = Math.abs(page - 1) * perPage;
 
-    return await Customer.find({
+    const totalSearchData = await Customer.countDocuments({
+      is_active: true,
+      createdAt: {
+        $gte: new Date(changeInputStart),
+        $lte: new Date(changeInputEnd),
+      },
+    });
+    const searchData = await Customer.find({
       is_active: true,
       createdAt: {
         $gte: new Date(changeInputStart),
@@ -206,29 +213,16 @@ const getCustomersPaginationByMonth = async (_, { input }, { req }) => {
     })
       .lean()
       .sort({ createdAt: 1 })
-      .limit(perPage)
+      .limit(parseInt(perPage))
       .skip(startIndex)
       .exec();
-  } catch (error) {
-    console.log(error);
-    throw error;
-  }
-};
 
-const getTotalCustomersPaginationByMonth = async (_, { input }, { req }) => {
-  try {
-    checkAuth(req);
-    const { this_month } = input;
-    const changeInputStart = this_month + "-01T00:00:01";
-    const changeInputEnd = this_month + "-31T23:59:59";
+    const searchResult = {
+      totalSearchData,
+      searchData,
+    };
 
-    return await Customer.countDocuments({
-      is_active: true,
-      createdAt: {
-        $gte: new Date(changeInputStart),
-        $lte: new Date(changeInputEnd),
-      },
-    });
+    return searchResult;
   } catch (error) {
     console.log(error);
     throw error;
@@ -316,7 +310,6 @@ module.exports = {
     getAllCustomers,
     searchCustomer,
     getCustomersPaginationByMonth,
-    getTotalCustomersPaginationByMonth,
     getCustomerById,
   },
   Mutation: {

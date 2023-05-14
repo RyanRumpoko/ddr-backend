@@ -17,7 +17,7 @@ module.exports = gql`
     createdAt: DateTime
     updatedAt: DateTime
   }
-  type SearchCustomer {
+  type CustomerPagination {
     totalSearchData: Int!
     searchData: [Customer]
   }
@@ -49,9 +49,6 @@ module.exports = gql`
     page: Int!
     perPage: Int!
   }
-  input GetTotalCustomersPaginationByMonthInput {
-    this_month: DateTime
-  }
   input UpdateCustomerInput {
     _id: ID
     name: String
@@ -66,13 +63,10 @@ module.exports = gql`
 
   type Query {
     getAllCustomers: [Customer]
-    searchCustomer(input: SearchCustomerInput): SearchCustomer
+    searchCustomer(input: SearchCustomerInput): CustomerPagination
     getCustomersPaginationByMonth(
       input: GetCustomersPaginationByMonthInput
-    ): [Customer]
-    getTotalCustomersPaginationByMonth(
-      input: GetTotalCustomersPaginationByMonthInput
-    ): Int!
+    ): CustomerPagination
     getCustomerById(_id: ID): Customer!
   }
   type Mutation {
