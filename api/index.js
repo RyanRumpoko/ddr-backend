@@ -8,7 +8,7 @@ const mongoose = require("mongoose");
 const { json } = require("body-parser");
 const { mergeResolvers, mergeTypeDefs } = require("@graphql-tools/merge");
 const { loadFilesSync } = require("@graphql-tools/load-files");
-const router = require("./routes/index");
+const router = require("../routes/index");
 require("dotenv").config();
 mongoose.set("strictQuery", true);
 
@@ -16,10 +16,10 @@ const app = express();
 const httpServer = http.createServer(app);
 
 const resolvers = mergeResolvers(
-  loadFilesSync(path.join(__dirname, "./graphql/**/resolvers.graphql.js"))
+  loadFilesSync(path.join(__dirname, "../graphql/**/resolvers.graphql.js"))
 );
 const typeDefs = mergeTypeDefs(
-  loadFilesSync(path.join(__dirname, "./graphql/**/typeDefs.graphql.js"))
+  loadFilesSync(path.join(__dirname, "../graphql/**/typeDefs.graphql.js"))
 );
 
 const apolloServer = new ApolloServer({
@@ -46,7 +46,7 @@ const startServer = async () => {
 startServer();
 
 mongoose
-  .connect(process.env.DATABASE_ATLAS, {
+  .connect(process.env.DATABASE_LOCAL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
