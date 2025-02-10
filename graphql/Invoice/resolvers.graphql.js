@@ -206,7 +206,7 @@ const searchInvoice = async (_, { input }, { req }) => {
       input.estimated_date_max >= input.estimated_date_min
     ) {
       let start = new Date(input.estimated_date_min);
-      start.setUTCHours(0, 0, 0, 000);
+      start.setUTCHours(0, 0, 0, 0o0);
       let end = new Date(input.estimated_date_max);
       end.setUTCHours(23, 59, 59, 999);
       filterObject.push({
@@ -223,7 +223,7 @@ const searchInvoice = async (_, { input }, { req }) => {
       input.ongoing_date_max >= input.ongoing_date_min
     ) {
       let start = new Date(input.ongoing_date_min);
-      start.setUTCHours(0, 0, 0, 000);
+      start.setUTCHours(0, 0, 0, 0o0);
       let end = new Date(input.ongoing_date_max);
       end.setUTCHours(23, 59, 59, 999);
       filterObject.push({

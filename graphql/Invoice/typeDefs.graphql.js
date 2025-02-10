@@ -12,6 +12,8 @@ module.exports = gql`
     estimated_date: DateTime
     ongoing_date: DateTime
     total_invoice: Int
+    total_service: Int
+    total_non_service: Int
     note: String
     createdAt: DateTime
     updatedAt: DateTime
