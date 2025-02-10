@@ -30,6 +30,12 @@ const invoiceSchema = new Schema(
     total_invoice: {
       type: Number,
     },
+    total_service: {
+      type: Number,
+    },
+    total_non_service: {
+      type: Number,
+    },
     note: {
       type: String,
     },
