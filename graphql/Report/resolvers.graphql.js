@@ -21,7 +21,7 @@ const getAllReportPagination = async (_, { input }, { req }) => {
     const totalSearchData = await Report.countDocuments();
     const searchData = await Report.find()
       .lean()
-      .sort({ createdAt: 1 })
+      .sort({ createdAt: -1 })
       .limit(parseInt(perPage))
       .skip(startIndex)
       .exec();
